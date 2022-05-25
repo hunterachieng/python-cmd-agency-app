@@ -1,4 +1,3 @@
-import csv
 from abstract import CSVSort
 
 class MergeSort(CSVSort):
@@ -10,7 +9,7 @@ class MergeSort(CSVSort):
     def sortData(self):
         if len(self.data) >1:
             middle = len(self.data)//2
-            left =  self.data[1:middle]
+            left =  self.data[:middle]
             right = self.data[middle:]
 
             leftSort = MergeSort(left)
