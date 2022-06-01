@@ -1,4 +1,3 @@
-from tokenize import group
 import click
 import csv
 from sorting import MergeSort
