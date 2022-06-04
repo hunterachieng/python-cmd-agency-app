@@ -5,9 +5,6 @@ from sorting import MergeSort
 from searching import SearchCSV
 
 @click.group()
-@click.option('--target', default='string', help='the value of the finder i.e "NULL" from id')
-@click.option('--finder', default='string', help='key of the target i.e "Id, ImageSrc"')
-@click.option('--file_name', default='string', help='name of the csv file with extention i.e "test.csv"')
 def main():
     """ Reads CSVs, sorts, and writes into them """
     
@@ -37,6 +34,7 @@ def csv_read_details(file_name):
 
 @click.command(name='sorting')
 @click.argument('file_name', type=click.Path(exists=True))
+@click.option('--file_name', default='string', help='name of the csv file with extention i.e "test.csv"')
 def csv_read_and_sort(file_name):
     return csv_read_details(file_name)
 
@@ -48,6 +46,7 @@ def search_csv (file_name, target, finder):
     with open(file_name, "r") as file:
         reader = csv.DictReader(file)
         data = list(reader)
+        
       
         things = SearchCSV(data,target, finder)
         print(things.search())
@@ -57,7 +56,8 @@ def search_csv (file_name, target, finder):
 @click.argument('file_name', type=click.Path(exists=True), nargs = 1)
 @click.argument('target', nargs = 1)
 @click.argument('finder',nargs = 1)
-
+@click.option('--target', default='string', help='the value of the finder i.e "NULL" from id')
+@click.option('--finder', default='string', help='key of the target i.e "Id, ImageSrc"')
 def csv_search(file_name, target, finder):
     return search_csv(file_name, target, finder)
 
