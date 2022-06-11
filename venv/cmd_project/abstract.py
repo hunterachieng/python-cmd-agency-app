@@ -14,3 +14,8 @@ class CSVSearch(ABC):
     def search(self):
         pass
 
+
+class CSVPrice(ABC):
+    @abstractmethod
+    def csvPrice(self):
+        pass
