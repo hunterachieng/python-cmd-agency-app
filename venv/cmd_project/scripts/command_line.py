@@ -1,8 +1,8 @@
-# from argparse import _NArgsStr
 import click
 import csv
 from sorting import MergeSort
 from searching import SearchCSV
+from duplicate import RemoveCSVDuplicates
 
 @click.group()
 def main():
@@ -62,10 +62,29 @@ def csv_search(file_name, target, finder):
     return search_csv(file_name, target, finder)
 
 
+# Removing duplicate entries from the csv
+
+def remove_duplicates(file_name, finder):
+    with open(file_name, "r") as file:
+        reader = csv.DictReader(file)
+        data = list(reader)
+        
+        without = RemoveCSVDuplicates(data,finder)
+        print(without.removeDuplicates())
+      
+
+@click.command(name='duplicates')
+@click.argument('file_name', type=click.Path(exists=True), nargs = 1)
+@click.argument('finder',nargs = 1)
+@click.option('--finder', default='string', help='key of the duplicate target i.e "Id, zpid"')
+@click.option('--file_name', default='string', help='name of the csv file with extention i.e "test.csv"')
+def csv_remove_duplicates(file_name,finder):
+    return remove_duplicates(file_name,finder)
 
     
 main.add_command(csv_read_and_sort,'sorting')
 main.add_command(csv_search,'searching')
+main.add_command(csv_remove_duplicates,'duplicates')
 
 if __name__ == "__main__":
     main()
