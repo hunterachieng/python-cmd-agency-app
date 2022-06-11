@@ -1,0 +1,3 @@
+[console_scripts]
+command_line = scripts.command_line:main
+
