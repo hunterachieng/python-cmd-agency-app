@@ -1,7 +1,7 @@
-from abstract import CSVSort
+from abstract import CSVSearch
 
-class SearchCSV(CSVSort):
-    def __init__(self,data, target, finder):
+class SearchCSV(CSVSearch):
+    def __init__(self,data, target, finder ):
         self.data = data
         self.target =target
         self.finder = finder
@@ -13,17 +13,17 @@ class SearchCSV(CSVSort):
         while left <= right:
             mid = (left +right) //2
             if self.target == self.data[mid][self.finder]:
-                return mid
+                return self.data[mid]
             else:
                 if self.target < self.data[mid][self.finder]:
                    right = mid -1 
                 if self.target > self.data[mid][self.finder]:              
                     left = mid +1
     
-    def __str__(self) -> str:
+    
         
         
-        print(self.target)
+
                 
 
 
